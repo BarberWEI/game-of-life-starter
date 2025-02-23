@@ -5,17 +5,17 @@ int[][] grid;
 void setup() {
   size(800, 600);
   noStroke();
-  frameRate(10);
+  frameRate(.5);
   grid = new int[height / SPACING][width / SPACING];
-  getFirstGrid();
+  getFirstGrid(grid);
 }
 
 void draw() {
-  showGrid();
-  grid = calcNextGrid();
+  showGrid(grid);
+  grid = calcNextGrid(grid);
 }
 
-void getFirstGrid() {
+void getFirstGrid(int[][] grid) {
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[i].length; j++) {
       if (random(1) <= DENSITY) {
@@ -27,25 +27,27 @@ void getFirstGrid() {
   }
 }
 
-boolean cellOutOfBounds(int cellRow, int cellCol) {
+boolean cellOutOfBounds(int cellRow, int cellCol, int[][] grid) {
   if (cellRow == grid.length) {
-    return false;
+    return true;
   } else if (cellRow == -1) {
-    return false;
-  } else if (cellCol == grid.length) {
-    return false;
+    return true;
+  } else if (cellCol == grid[cellRow].length) {
+    return true;
   } else if (cellCol == -1) {
-    return false;
+    return true;
   }
-  return true;
+  return false;
 }
 
-int[][] calcNextGrid() {
+int[][] calcNextGrid(int[][] grid) {
   int[][] nextGrid = new int[grid.length][grid[0].length];
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[i].length; j++) {
-      int valueOfCell = calcOneNextCell(i, j);
-      if (valueOfCell > 1 && valueOfCell < 4) {
+      int valueOfCell = countNeighbors(i, j, grid);
+      if ((valueOfCell > 1 && valueOfCell < 4) && grid[i][j] == 1) {
+        nextGrid[i][j] = 1;
+      } else if (valueOfCell == 3) {
         nextGrid[i][j] = 1;
       } else {
         nextGrid[i][j] = 0;
@@ -55,25 +57,23 @@ int[][] calcNextGrid() {
   return nextGrid;
 }
 
-int calcOneNextCell(int row, int col) {
+int countNeighbors(int row, int col, int[][] grid) {
   int valueOfCell = 0;
-  for (int i = -1; i < -2; i++) {
-    for (int j = -1; j < -2; j++) {
-      if (!cellOutOfBounds(row + i, col + j) && grid[row][col] == 1) {
-        valueOfCell++;
+  for (int i = -1; i <= 1; i++) {
+    for (int j = -1; j <= 1; j++) {
+      if (!cellOutOfBounds(row + i, col + j, grid)) {
+        boolean isSelf = grid[row][col] == grid[row + i][col + j];
+        boolean isLivingCell = grid[row + i][col + j] == 1;
+        if (isLivingCell && !isSelf) {
+          valueOfCell++;
+        }
       }
     }
   }
   return valueOfCell;
 }
 
-int countNeighbors(int y, int x) {
-  int n = 0; // don't count yourself!
-
-  return n;
-}
-
-void showGrid() {
+void showGrid(int[][] grid) {
   // your code here
   for (int i = 0; i < grid.length; i++) {
     for (int j = 0; j < grid[i].length; j++) {
