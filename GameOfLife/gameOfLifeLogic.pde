@@ -15,6 +15,13 @@ public class logic {
     getFirstGrid();
   }
     
+  public int[][] getGrid() {
+    return grid;
+  }  
+  
+  public void setGrid(int row, int col, int val) {
+    grid[row][col] = val;
+  }
   public void iterateAndShow() {
     keepTrackOfPastGrids();
     showGrid();
@@ -91,7 +98,7 @@ public class logic {
     }
   }
   
-  private void showGrid() {
+  public void showGrid() {
     // your code here
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < grid[i].length; j++) {

@@ -19,6 +19,15 @@ void setup() {
 void draw() {
   if(!pause) {
     gameOfLife.iterateAndShow();
+  } else {
+    if (mousePressed) {
+      int x = mouseX;
+      int y = mouseY;
+      gameOfLife.setGrid(y/SPACING, x/SPACING, 1);
+      gameOfLife.showGrid();
+      System.out.println(x/SPACING);
+      // work on here
+    }
   }
 }
 
