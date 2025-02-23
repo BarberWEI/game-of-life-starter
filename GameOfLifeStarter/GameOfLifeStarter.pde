@@ -3,7 +3,7 @@ final float DENSITY = 0.1;
 int[][] grid;
 
 void setup() {
-  size(1600, 800);
+  size(1420, 850);
   noStroke();
   frameRate(10);
   grid = new int[height / SPACING][width / SPACING];
