@@ -21,11 +21,14 @@ void draw() {
     gameOfLife.iterateAndShow();
   } else {
     if (mousePressed) {
-      int x = mouseX;
-      int y = mouseY;
-      gameOfLife.setGrid(y/SPACING, x/SPACING, 1);
+      int row = mouseY/SPACING;
+      int col = mouseX/SPACING;
+      if (gameOfLife.getGrid()[row][col] == 0){
+        gameOfLife.setGrid(row, col, 1);
+      } else {
+        gameOfLife.setGrid(row, col, 0);
+      }
       gameOfLife.showGrid();
-      System.out.println(x/SPACING);
       // work on here
     }
   }
