@@ -1,16 +1,22 @@
 public class logic {
-private final int SPACING;
-private final float DENSITY;
-private int[][] grid ;
+  private final int SPACING;
+  private final float DENSITY;
+  private int[][] grid ;
+  // set to 5 because I don't want to have too many things being kept by my computer
+  private int[][][] pastGrids = new int[5][][];
 
   public logic(int SPACING, float DENSITY, int[][] grid) {
     this.SPACING = SPACING;
     this.DENSITY = DENSITY;
     this.grid = grid;
+    for (int i = 0; i < pastGrids.length; i++) {
+      pastGrids[i] = grid;
+    }
     getFirstGrid();
   }
     
   public void iterateAndShow() {
+    keepTrackOfPastGrids();
     showGrid();
     gameOfLife.calcNextGrid();
   }
@@ -75,6 +81,16 @@ private int[][] grid ;
     return valueOfCell;
   }
   
+  private void keepTrackOfPastGrids() {
+     for (int i = pastGrids.length - 1; i >= 0; i--) {
+      if (i == 0) {
+        pastGrids[0] = grid;
+      } else {
+        pastGrids[i] = pastGrids[i -1];
+      }
+    }
+  }
+  
   private void showGrid() {
     // your code here
     for (int i = 0; i < grid.length; i++) {
@@ -88,5 +104,10 @@ private int[][] grid ;
         }
       }
     }
+  }
+  
+  public void moveBackwards(int numberOfIterationsPassed) {
+    grid = pastGrids[numberOfIterationsPassed];
+    showGrid();
   }
 }
