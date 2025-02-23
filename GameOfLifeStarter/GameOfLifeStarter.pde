@@ -3,9 +3,9 @@ final float DENSITY = 0.1;
 int[][] grid;
 
 void setup() {
-  size(800, 600);
+  size(1600, 800);
   noStroke();
-  frameRate(.5);
+  frameRate(10);
   grid = new int[height / SPACING][width / SPACING];
   getFirstGrid(grid);
 }
@@ -62,7 +62,7 @@ int countNeighbors(int row, int col, int[][] grid) {
   for (int i = -1; i <= 1; i++) {
     for (int j = -1; j <= 1; j++) {
       if (!cellOutOfBounds(row + i, col + j, grid)) {
-        boolean isSelf = grid[row][col] == grid[row + i][col + j];
+        boolean isSelf = i == 0 && j == 0;
         boolean isLivingCell = grid[row + i][col + j] == 1;
         if (isLivingCell && !isSelf) {
           valueOfCell++;
