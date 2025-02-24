@@ -1,9 +1,11 @@
 final int SPACING = 20;
 final float DENSITY = 0.1;
+final int NUMBER_OF_GRIDS_BEING_KEPT = 5;
 int[][] grid;
 boolean pause = false;
 boolean mouseLetGo = false;
 int numberOfIterationsPassed = 0;
+ 
 
 logic gameOfLife;
 
@@ -12,7 +14,7 @@ void setup() {
   noStroke();
   frameRate(10);
   grid = new int[height / SPACING][width / SPACING];
-  gameOfLife = new logic(SPACING, DENSITY, grid);
+  gameOfLife = new logic(SPACING, DENSITY, grid, NUMBER_OF_GRIDS_BEING_KEPT);
   //gameOfLife.getFirstGrid(grid);
 }
 
@@ -21,6 +23,7 @@ void draw() {
     gameOfLife.iterateAndShow();
   } else {
     useMouseToChangeCell();
+    gameOfLife.showGrid();
   }
 }
 
@@ -30,17 +33,17 @@ void mouseReleased() {
 
 void useMouseToChangeCell() {
   if (mousePressed && mouseLetGo) {
-      int row = mouseY/SPACING;
-      int col = mouseX/SPACING;
-      if (gameOfLife.getGrid()[row][col] == 0){
-        gameOfLife.setGrid(row, col, 1);
-      } else {
-        gameOfLife.setGrid(row, col, 0);
-      }
-      mouseLetGo = false;
-      gameOfLife.showGrid();
-      // work on here
+    int row = mouseY/SPACING;
+    int col = mouseX/SPACING;
+    int[][] grid = gameOfLife.getGrid();
+    if (grid[row][col] == 0){
+      gameOfLife.setGrid(row, col, 1);
+    } else {
+      gameOfLife.setGrid(row, col, 0);
     }
+    mouseLetGo = false;
+    // work on here
+  }
 }
 
 void keyPressed() {
