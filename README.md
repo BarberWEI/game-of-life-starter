@@ -20,4 +20,17 @@ For a space that is unpopulated (0):
 
 Of course, checking indexes that are out-of-bounds will throw errors. You can get creative, but you may find that there is no "clean" solution to this. You'll end up with a bunch of if/else statements...
 
+
+
+
+My code does basic logic for the game, can pause, move forward one step at a time when paused, and move back 4 spaces when paused. However, moving back purely depends on what was kept in storage, meaning that when you manually move forward, then backward, then forward, then backward, the the resulting grid would be the third forward. 
+
+Also, you can click on blocks to add to them
+
+
+
+
+
+
+
 ### Good luck!
