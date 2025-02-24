@@ -2,6 +2,7 @@ public class logic {
   private final int SPACING;
   private final float DENSITY;
   private int[][] grid ;
+  private int[][] cellsLifeTime;
   // set to 5 because I don't want to have too many things being kept by my computer
   private int[][][] pastGrids;
 
@@ -9,6 +10,7 @@ public class logic {
     this.SPACING = SPACING;
     this.DENSITY = DENSITY;
     this.grid = grid;
+    this.cellsLifeTime = grid;
     pastGrids = new int[5][][];
     for (int i = 0; i < pastGrids.length; i++) {
       pastGrids[i] = grid;
@@ -22,8 +24,10 @@ public class logic {
   
   public void setGrid(int row, int col, int val) {
     grid[row][col] = val;
+    cellsLifeTime[row][col] = val;
     keepTrackOfPastGrids();
   }
+  
   public void iterateAndShow() {
     showGrid();
     gameOfLife.calcNextGrid();
@@ -33,6 +37,8 @@ public class logic {
   private void getFirstGrid() {
     for (int i = 0; i < grid.length; i++) { //<>//
       for (int j = 0; j < grid[i].length; j++) {
+        // initializes the counter for amount of itterations the cells has been alive for
+        cellsLifeTime[i][j] = 0;
         if (random(1) <= DENSITY) {
           grid[i][j] = 1;
         } else {
@@ -105,15 +111,40 @@ public class logic {
     for (int i = 0; i < grid.length; i++) {
       for (int j = 0; j < grid[i].length; j++) {
         if (grid[i][j] == 0) {
+          cellsLifeTime[i][j] = 0;
           fill(232, 220, 202);
           square(j * SPACING, i * SPACING, SPACING);
         } else {
-          fill(15, 82, 186);
+          
+          // buggy
+          cellsLifeTime[i][j] ++;
+          //int[] colors = colorGenerator(i, j);
+         
+          fill(35, 41, 122);
           square(j * SPACING, i * SPACING, SPACING);
         }
       }
     }
   }
+  
+  //public int[] colorGenerator(int row, int col) {
+  //  if (cellsLifeTime[row][col] > 500) {
+  //    int[] colors = {35, 41, 122};
+  //    return colors;
+  //  } else if (cellsLifeTime[row][col] > 250) {
+  //    int[] colors = {0, 72, 186};
+  //    return colors;
+  //  } else if (cellsLifeTime[row][col] > 100) {
+  //    int[] colors = {176, 224, 230};
+  //    return colors;
+  //  } else if (cellsLifeTime[row][col] > 25) {
+  //    int[] colors = {135, 206, 235};
+  //    return colors;
+  //  } else {
+  //    int[] colors = {209, 234, 240};
+  //    return colors;
+  //  }
+  //}
   
   public void moveBackwards(int numberOfIterationsPassed) {
     grid = pastGrids[numberOfIterationsPassed];
