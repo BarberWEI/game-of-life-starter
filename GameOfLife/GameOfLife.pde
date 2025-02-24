@@ -7,14 +7,14 @@ boolean mouseLetGo = false;
 int numberOfIterationsPassed = 0;
  
 
-logic gameOfLife;
+Logic gameOfLife;
 
 void setup() {
   size(1400, 850);
   noStroke();
   frameRate(10);
   grid = new int[height / SPACING][width / SPACING];
-  gameOfLife = new logic(SPACING, DENSITY, grid, NUMBER_OF_GRIDS_BEING_KEPT);
+  gameOfLife = new Logic(SPACING, DENSITY, grid, NUMBER_OF_GRIDS_BEING_KEPT);
   //gameOfLife.getFirstGrid(grid);
 }
 
