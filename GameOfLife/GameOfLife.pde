@@ -1,4 +1,4 @@
-final int SPACING = 2;
+final int SPACING = 20;
 final float DENSITY = 0.4;
 final int NUMBER_OF_GRIDS_BEING_KEPT = 5;
 int[][] grid;
@@ -10,7 +10,9 @@ int numberOfIterationsPassed = 0;
 Logic gameOfLife;
 
 void setup() {
-  size(1400, 850);
+  //size(1400, 850);
+  // i think most computer screens are divisible by 20 so fullscreen works
+  fullScreen();
   noStroke();
   frameRate(10);
   grid = new int[height / SPACING][width / SPACING];
