@@ -130,23 +130,17 @@ public class Logic { //<>//
 
   public int[] colorGenerator(int row, int col) {
     if (cellsLifeTime[row][col] > 1000) {
-      int[] colors = {0, 0, 0};
-      return colors;
+      return new int[] {0, 0, 0};
     } else if (cellsLifeTime[row][col] > 500) {
-      int[] colors = {35, 41, 122};
-      return colors;
+      return new int[] {35, 41, 122};
     } else if (cellsLifeTime[row][col] > 250) {
-      int[] colors = {0, 72, 186};
-      return colors;
+      return new int[] {0, 72, 186};
     } else if (cellsLifeTime[row][col] > 125) {
-      int[] colors = {135, 206, 235};
-      return colors;
+      return new int[] {135, 206, 235};
     } else if (cellsLifeTime[row][col] > 62) {
-      int[] colors = {176, 224, 230};
-      return colors;
+      return new int[] {176, 224, 230};
     } else {
-      int[] colors = {209, 234, 240};
-      return colors;
+      return new int[] {209, 234, 240};
     }
   }
 
