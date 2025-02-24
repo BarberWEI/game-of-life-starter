@@ -2,7 +2,7 @@ final int SPACING = 20;
 final float DENSITY = 0.1;
 int[][] grid;
 boolean pause = false;
-
+boolean mouseLetGo = false;
 int numberOfIterationsPassed = 0;
 
 logic gameOfLife;
@@ -20,7 +20,16 @@ void draw() {
   if(!pause) {
     gameOfLife.iterateAndShow();
   } else {
-    if (mousePressed) {
+    useMouseToChangeCell();
+  }
+}
+
+void mouseReleased() {
+  mouseLetGo = true;
+}
+
+void useMouseToChangeCell() {
+  if (mousePressed && mouseLetGo) {
       int row = mouseY/SPACING;
       int col = mouseX/SPACING;
       if (gameOfLife.getGrid()[row][col] == 0){
@@ -28,10 +37,10 @@ void draw() {
       } else {
         gameOfLife.setGrid(row, col, 0);
       }
+      mouseLetGo = false;
       gameOfLife.showGrid();
       // work on here
     }
-  }
 }
 
 void keyPressed() {
