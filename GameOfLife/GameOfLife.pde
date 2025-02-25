@@ -1,5 +1,5 @@
 final int SPACING = 20;
-final float DENSITY = 0.4;
+final float DENSITY = 0.1;
 final int NUMBER_OF_GRIDS_BEING_KEPT = 5;
 int[][] grid;
 boolean pause = false;
