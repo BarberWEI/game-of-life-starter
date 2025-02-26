@@ -5,7 +5,7 @@ int[][] grid;
 boolean pause = false;
 boolean mouseLetGo = false;
 int numberOfIterationsPassed = 0;
- 
+
 
 Logic gameOfLife;
 
@@ -21,7 +21,7 @@ void setup() {
 }
 
 void draw() {
-  if(!pause) {
+  if (!pause) {
     gameOfLife.iterateAndShow();
   } else {
     useMouseToChangeCell();
@@ -38,7 +38,7 @@ void useMouseToChangeCell() {
     int row = mouseY/SPACING;
     int col = mouseX/SPACING;
     int[][] grid = gameOfLife.getGrid();
-    if (grid[row][col] == 0){
+    if (grid[row][col] == 0) {
       gameOfLife.setGrid(row, col, 1);
     } else {
       gameOfLife.setGrid(row, col, 0);
